@@ -1,0 +1,57 @@
+
+/* Class = "UIViewController"; title = "Wrong"; ObjectID = "3bg-YU-lDp"; */
+"3bg-YU-lDp.title" = "Wrong";
+
+/* Class = "UIViewController"; title = "Question"; ObjectID = "5Xr-HI-vrN"; */
+"5Xr-HI-vrN.title" = "Question";
+
+/* Class = "UITextField"; text = "That's an Out!"; ObjectID = "75G-Rf-QVk"; */
+"75G-Rf-QVk.text" = "That's an Out!";
+
+/* Class = "UIViewController"; title = "3Outs"; ObjectID = "8UI-jl-SEN"; */
+"8UI-jl-SEN.title" = "3Outs";
+
+/* Class = "UITextField"; text = "1-Run"; ObjectID = "8Zu-JH-rl5"; */
+"8Zu-JH-rl5.text" = "1-Run";
+
+/* Class = "UILabel"; text = "Position"; ObjectID = "Dvm-dD-oQe"; */
+"Dvm-dD-oQe.text" = "Position";
+
+/* Class = "UITextField"; text = "That's it"; ObjectID = "ERW-CN-TxQ"; */
+"ERW-CN-TxQ.text" = "That's it";
+
+/* Class = "UITextField"; text = "Wrong!"; ObjectID = "HaQ-ha-QWd"; */
+"HaQ-ha-QWd.text" = "Wrong!";
+
+/* Class = "UITextField"; text = "Correct!"; ObjectID = "JlA-QZ-HeF"; */
+"JlA-QZ-HeF.text" = "Correct!";
+
+/* Class = "UITextView"; text = "Jacob deGrom 2018"; ObjectID = "WQF-Yf-uuO"; */
+"WQF-Yf-uuO.text" = "Jacob deGrom 2018";
+
+/* Class = "UITextView"; text = "Klayton Kershaw 2014"; ObjectID = "Zbg-wb-yqp"; */
+"Zbg-wb-yqp.text" = "Klayton Kershaw 2014";
+
+/* Class = "UIViewController"; title = "RIght"; ObjectID = "f3N-a7-hg4"; */
+"f3N-a7-hg4.title" = "RIght";
+
+/* Class = "UILabel"; text = "10-23 MLB Trivia"; ObjectID = "jDu-Dm-zzj"; */
+"jDu-Dm-zzj.text" = "10-23 MLB Trivia";
+
+/* Class = "UILabel"; text = "Earned Runs: 6"; ObjectID = "pfs-ls-dya"; */
+"pfs-ls-dya.text" = "Earned Runs: 6";
+
+/* Class = "UIButton"; configuration.title = "One more Inning?"; ObjectID = "r9Y-O6-IpW"; */
+"r9Y-O6-IpW.configuration.title" = "One more Inning?";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "r9Y-O6-IpW"; */
+"r9Y-O6-IpW.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "Earned Runs: "; ObjectID = "vlg-mU-29s"; */
+"vlg-mU-29s.text" = "Earned Runs: ";
+
+/* Class = "UITextField"; text = "3 Outs!"; ObjectID = "wb3-fn-hTA"; */
+"wb3-fn-hTA.text" = "3 Outs!";
+
+/* Class = "UITextField"; text = "WAR"; ObjectID = "yf8-7m-FzO"; */
+"yf8-7m-FzO.text" = "WAR";

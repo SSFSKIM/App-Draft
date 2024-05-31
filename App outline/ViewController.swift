@@ -36,23 +36,44 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     
     func loadRandomPlayers() {
-         let isPitcher = Bool.random()
-         if isPitcher {
-             PositionType.text = "Pitcher"
-             let player1 = pitchers.randomElement()!
-             let player2 = pitchers.randomElement()!
-             Choice1.text = "\(player1.playerName) \(player1.season)"
-             Choice2.text = "\(player2.playerName) \(player2.season)"
-             StatType.text = "WAR"
-         } else {
-             PositionType.text = "Hitter"
-             let player1 = hitters.randomElement()!
-             let player2 = hitters.randomElement()!
-             Choice1.text = "\(player1.playerName) \(player1.season)"
-             Choice2.text = "\(player2.playerName) \(player2.season)"
-             StatType.text = "WAR"
-         }
-     }
+        let isPitcher = Bool.random()
+        
+        if isPitcher {
+            PositionType.text = "Pitcher"
+            
+            // Safely unwrap the random elements from the pitchers array
+            if let player1 = pitchers.randomElement(), let player2 = pitchers.randomElement() {
+                Choice1.text = "\(player1.playerName) \(player1.season)"
+                Choice2.text = "\(player2.playerName) \(player2.season)"
+                StatType.text = "WAR"
+            } else {
+                print("Error: Pitchers array is empty")
+                // Handle the empty array case appropriately, e.g., show an alert to the user
+                showErrorAlert(message: "No pitcher data available.")
+            }
+        } else {
+            PositionType.text = "Hitter"
+            
+            // Safely unwrap the random elements from the hitters array
+            if let player1 = hitters.randomElement(), let player2 = hitters.randomElement() {
+                Choice1.text = "\(player1.playerName) \(player1.season)"
+                Choice2.text = "\(player2.playerName) \(player2.season)"
+                StatType.text = "WAR"
+            } else {
+                print("Error: Hitters array is empty")
+                // Handle the empty array case appropriately, e.g., show an alert to the user
+                showErrorAlert(message: "No hitter data available.")
+            }
+        }
+    }
+
+    // Helper function to show an alert in case of errors
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     @IBAction func choice1selected(_ sender: Any) {
         checkAnswer(selectedPlayer: 1)

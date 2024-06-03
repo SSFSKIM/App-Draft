@@ -12,6 +12,9 @@ struct Hitter: Codable {
     let WAR: Double
     let AVG: Double
     let OPS: Double
+    let wRC: Double
+    let OBP: Double
+    let SLG: Double
 }
 
 struct Pitcher: Codable {
@@ -20,6 +23,8 @@ struct Pitcher: Codable {
     let WAR: Double
     let ERA: Double
     let WHIP: Double
+    let FIP: Double
+    let SO: Int
 }
 class ViewController: UIViewController, UITextViewDelegate {
     
@@ -167,6 +172,8 @@ class ViewController: UIViewController, UITextViewDelegate {
                 return player.WAR
             case "ERA":
                 return player.ERA
+            case "FIP":
+                return player.FIP
             case "WHIP":
                 return player.WHIP
             default:

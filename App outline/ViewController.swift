@@ -6,7 +6,21 @@
 //
 import UIKit
 import Foundation
+struct Hitter: Codable {
+    let PlayerName: String
+    let Season: Int
+    let WAR: Double
+    let AVG: Double
+    let OPS: Double
+}
 
+struct Pitcher: Codable {
+    let PlayerName: String
+    let Season: Int
+    let WAR: Double
+    let ERA: Double
+    let WHIP: Double
+}
 class ViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var Outs: UIStackView!
@@ -22,6 +36,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     var outs: Int = 0
     var currentStat: String = ""
     
+
     var hitters: [Hitter] = []
     var pitchers: [Pitcher] = []
     
@@ -34,6 +49,18 @@ class ViewController: UIViewController, UITextViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if hitters.isEmpty {
+            showErrorAlert(message: "No hitter data available.")
+        } else if pitchers.isEmpty {
+            showErrorAlert(message: "No pitcher data available.")
+        } else {
+            loadRandomPlayers()
+        }
+    }
+
     
     func loadRandomPlayers() {
         let isPitcher = Bool.random()
@@ -43,8 +70,8 @@ class ViewController: UIViewController, UITextViewDelegate {
             
             // Safely unwrap the random elements from the pitchers array
             if let player1 = pitchers.randomElement(), let player2 = pitchers.randomElement() {
-                Choice1.text = "\(player1.playerName) \(player1.season)"
-                Choice2.text = "\(player2.playerName) \(player2.season)"
+                Choice1.text = "\(player1.PlayerName) \(player1.Season)"
+                Choice2.text = "\(player2.PlayerName) \(player2.Season)"
                 StatType.text = "WAR"
             } else {
                 print("Error: Pitchers array is empty")
@@ -56,8 +83,8 @@ class ViewController: UIViewController, UITextViewDelegate {
             
             // Safely unwrap the random elements from the hitters array
             if let player1 = hitters.randomElement(), let player2 = hitters.randomElement() {
-                Choice1.text = "\(player1.playerName) \(player1.season)"
-                Choice2.text = "\(player2.playerName) \(player2.season)"
+                Choice1.text = "\(player1.PlayerName) \(player1.Season)"
+                Choice2.text = "\(player2.PlayerName) \(player2.Season)"
                 StatType.text = "WAR"
             } else {
                 print("Error: Hitters array is empty")
@@ -92,25 +119,35 @@ class ViewController: UIViewController, UITextViewDelegate {
         var player2Stat: Double = 0
         
         if isPitcher {
-            let player1 = pitchers.first { $0.playerName + " " + String($0.season) == Choice1.text }!
-            let player2 = pitchers.first { $0.playerName + " " + String($0.season) == Choice2.text }!
+            guard let player1 = pitchers.first(where: { $0.PlayerName + " " + String($0.Season) == Choice1.text }),
+                  let player2 = pitchers.first(where: { $0.PlayerName + " " + String($0.Season) == Choice2.text }) else {
+                print("Error: Could not find one or both pitchers")
+                showErrorAlert(message: "Error: Could not find one or both pitchers.")
+                return
+            }
             player1Stat = getStatValue(player: player1, stat: currentStat)
             player2Stat = getStatValue(player: player2, stat: currentStat)
         } else {
-            let player1 = hitters.first { $0.playerName + " " + String($0.season) == Choice1.text }!
-            let player2 = hitters.first { $0.playerName + " " + String($0.season) == Choice2.text }!
+            guard let player1 = hitters.first(where: { $0.PlayerName + " " + String($0.Season) == Choice1.text }),
+                  let player2 = hitters.first(where: { $0.PlayerName + " " + String($0.Season) == Choice2.text }) else {
+                print("Error: Could not find one or both hitters")
+                showErrorAlert(message: "Error: Could not find one or both hitters.")
+                return
+            }
             player1Stat = getStatValue(player: player1, stat: currentStat)
             player2Stat = getStatValue(player: player2, stat: currentStat)
         }
         
         guard player1Stat.isFinite, player2Stat.isFinite else {
             print("Invalid stat value encountered")
+            showErrorAlert(message: "Invalid stat value encountered.")
             return
         }
         
         let isCorrect = (selectedPlayer == 1 && player1Stat > player2Stat) || (selectedPlayer == 2 && player2Stat > player1Stat)
         if isCorrect {
             earnedRuns += 1
+            Points.text = "Earned Runs: \(earnedRuns)"
             transitionToCorrectView()
         } else {
             outs += 1
@@ -121,6 +158,7 @@ class ViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
+    
     
     func getStatValue(player: Any, stat: String) -> Double {
         if let player = player as? Pitcher {
